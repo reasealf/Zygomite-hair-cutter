@@ -12,10 +12,7 @@
 
 
 local API                   = require('api')
-local UTILS                 = require('utils') -- dead's 
-local skill                 = "FLETCHING"
-local startXp               = API.GetSkillXP(skill)
-local startTime, afk        = os.time(), os.time()
+local afk                   = os.time()
 local MAX_IDLE_TIME_MINUTES = 15
 
 API.SetDrawTrackedSkills(true)
@@ -33,39 +30,30 @@ end
 local function openInv()
     if (not API.OpenInventoryInterface2()) then
         --API.KeyboardPress32(0x4D, 0)
-        API.DoAction_Interface(0x31,0xffffffff,1,1431,0,9,3808); --make sure this tab is open
+        API.DoAction_Interface(0x31, 0xffffffff, 1, 1431, 0, 9, API.OFF_ACT_GeneralInterface_route); --make sure this tab is open
         API.RandomSleep2(200, 200, 200)
     end
 end
 
 
-local function isAnimating(tick);
+local function isAnimating(tick)
     local test1 = API.CheckAnim(3)
     API.Count_ticks(tick)
     local test2 = API.CheckAnim(3)
     API.Count_ticks(tick)
-
-    if test1 == test2 then
-        local test1 = nil
-        local test2 = nil
-        return true -- still animating
-    else 
-        local test1 = nil
-        local test2 = nil
-        return false
-    end
+    return (test1 == test2)
 end
 
 local function openBarberShop()
 
     if isAnimating(1) then
-        API.DoAction_NPC_str(0xcd, 1488, { 'Scruffy zygomite'}, 50)        
+        API.DoAction_NPC_str(0xCD, API.OFF_ACT_InteractNPC_route, { 'Scruffy zygomite' }, 50)       
     end
 
 end
 
 while API.Read_LoopyLoop() do
-    API.RandomEvents()
+    API.DoRandomEvents()
     idleCheck()
     openInv()
 
