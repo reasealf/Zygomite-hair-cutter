@@ -12,7 +12,7 @@
 
 
 local API                   = require('api')
-local UTILS                 = require('utils') --higgins's 
+local UTILS                 = require('utils') -- dead's 
 local skill                 = "FLETCHING"
 local startXp               = API.GetSkillXP(skill)
 local startTime, afk        = os.time(), os.time()
