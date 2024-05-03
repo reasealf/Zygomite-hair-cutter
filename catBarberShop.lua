@@ -47,7 +47,7 @@ end
 local function openBarberShop()
 
     if isAnimating(1) then
-        API.DoAction_NPC_str(0xCD, API.OFF_ACT_InteractNPC_route, { 'Scruffy zygomite' }, 50)       
+        API.DoAction_NPC_str(0xCD, API.OFF_ACT_InteractNPC_route, { 'Scruffy zygomite' }, 2)       
     end
 
 end
